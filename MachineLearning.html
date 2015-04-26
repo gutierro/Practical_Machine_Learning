@@ -104,16 +104,16 @@ testData &lt;- pml.training[-inTrain, ]</code></pre>
 </div>
 <div id="predictive-model-fitting" class="section level3">
 <h3>Predictive Model fitting</h3>
-<p>I use the Random Forest algorith for because is quiet accurate and it works very well with the noice.[1]<br />For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated.</p>
+<p>I use the Random Forest algorithm for because is quiet accurate and it works very well with the noise.[1]<br />For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated.</p>
 <pre class="r"><code>controlRf &lt;- trainControl(method=&quot;cv&quot;, 10)
 modelRf &lt;- train(f, data=trainData, method=&quot;rf&quot;, trControl=controlRf, ntree=50)
 predictRf &lt;- predict(modelRf, testData)</code></pre>
 <p>***There random Forest Package in R provides the random Forest function that offers a much better performance than the “train” function with “rf” and the packages has in addition other functions, specific for plotting the random Forest object. The function uses “Leave one out” type of cross validation error and it is combined with “Bagging” to improve the performance. The output is an object with that contains the model fit and it already calculates the confusion Matrix and the “Out of bag” error. For this project I use the function “train” with “rf” taught in the class, but add an example of randomForest as a reference.</p>
 <pre class="r"><code>#modelRf2 &lt;- randomForest(f, data=pml.training, importance = FALSE,ntree = 50,mtry=length(subset))</code></pre>
 </div>
-<div id="residual-values-analysis" class="section level3">
-<h3>Residual values analysis</h3>
-<p>We new that the random Forest model is quite accurate in this case , the accuracy is 98.23% and the stimated out-of-sample error 1.77%. Increasing the number of trees would improve the accuracy at a cost of a big downgrade of the performance. Therefore tuning the number of trees it would not bring any benefit.</p>
+<div id="models-performance" class="section level3">
+<h3>Model’s performance</h3>
+<p>We new that the random Forest model is quite accurate in this case , the accuracy is 98.23% and the estimated out-of-sample error 1.77%. Increasing the number of trees would improve the accuracy at a cost of a big downgrade of the performance. Therefore tuning the number of trees it would not bring any benefit.</p>
 <pre class="r"><code>cm&lt;-confusionMatrix(testData$classe, predictRf)
 accuracy &lt;- as.numeric(cm$overall[1])
 oose &lt;- 1 - accuracy

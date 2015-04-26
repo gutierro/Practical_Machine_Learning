@@ -57,7 +57,7 @@ testData <- pml.training[-inTrain, ]
 
 
 ###Predictive Model fitting
-I use the Random Forest algorith for because is quiet accurate and it works very well with the noice.[1]  
+I use the Random Forest algorithm for because is quiet accurate and it works very well with the noise.[1]  
 For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated.
 
 ```{r,message=FALSE,warning=FALSE}
@@ -74,8 +74,8 @@ predictRf <- predict(modelRf, testData)
 
 
 
-###Residual values analysis
-We new that the random Forest model is quite accurate in this case , the accuracy is   98.23% and the stimated out-of-sample error 1.77%. Increasing the number of trees would improve the accuracy at a cost of a big downgrade of the performance. Therefore tuning the number of trees it would not bring any benefit.
+###Model's performance
+We new that the random Forest model is quite accurate in this case , the accuracy is   98.23% and the estimated out-of-sample error 1.77%. Increasing the number of trees would improve the accuracy at a cost of a big downgrade of the performance. Therefore tuning the number of trees it would not bring any benefit.
 
 
 ```{r,message=FALSE,warning=FALSE}

@@ -14,58 +14,10 @@ Exploring the testing data set, it can be observed several features that don't h
 
 ```r
 library(caret)
-```
-
-```
-## Warning: package 'caret' was built under R version 3.1.2
-```
-
-```
-## Loading required package: lattice
-```
-
-```
-## Warning: package 'lattice' was built under R version 3.1.3
-```
-
-```
-## Loading required package: ggplot2
-```
-
-```
-## Warning: package 'ggplot2' was built under R version 3.1.3
-```
-
-```r
 library(rpart)
-```
-
-```
-## Warning: package 'rpart' was built under R version 3.1.2
-```
-
-```r
 library(randomForest)
-```
-
-```
-## Warning: package 'randomForest' was built under R version 3.1.2
-```
-
-```
-## randomForest 4.6-10
-## Type rfNews() to see new features/changes/bug fixes.
-```
-
-```r
 library(FSelector)
-```
 
-```
-## Warning: package 'FSelector' was built under R version 3.1.2
-```
-
-```r
 pml.training<-read.csv("pml-training.csv")
 pml.testing<-read.csv("pml-testing.csv")
 

@@ -16,7 +16,7 @@ I have used the Correlation Feature Selection (CFS) to identify the most relevan
 To improve the performance I have reduced the dimension of the data sets, removing the irrelevant features.
 Exploring the testing data set, it can be observed several features that don't have a value (NA) and therefor they won't be relevant for the prediction. I reduce the original data sets to new ones with only the features with the sensors data and excluding the others, but including the class.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 library(caret)
 library(rpart)
 library(randomForest)
@@ -40,7 +40,7 @@ pml.training<-pml.training[,-(1:7)]
 To improve the performance, I use the Correlation Feature Selection (CFS) algorithm to select the most relevant features. This algorithm evaluates subsets of features on the basis that the subsets contain features  that are highly correlated with the classification and uncorrelated to each other.
 The cf function in R is configured to use a "Best First" strategy based on backtracking. (cf help for more information)
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 set.seed(33833) 
 subset <- cfs(classe~., pml.training)
 f <- as.simple.formula(subset, "classe")
@@ -49,7 +49,7 @@ f <- as.simple.formula(subset, "classe")
 ###Data Slicing
 I split the data 75% for the training and 25% what a split commonly use and perform quite well for data sets of this size.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 inTrain <- createDataPartition(pml.training$classe, p=.75, list=FALSE)
 trainData <- pml.training[inTrain, ]
 testData <- pml.training[-inTrain, ]
@@ -60,7 +60,7 @@ testData <- pml.training[-inTrain, ]
 I use the Random Forest algorith for because is quiet accurate and it works very well with the noice.[1]  
 For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 controlRf <- trainControl(method="cv", 10)
 modelRf <- train(f, data=trainData, method="rf", trControl=controlRf, ntree=50)
 predictRf <- predict(modelRf, testData)
@@ -68,7 +68,7 @@ predictRf <- predict(modelRf, testData)
 
 ***There random Forest Package in R provides the random Forest function that offers a much better performance than the "train" function with "rf" and the packages has in addition other functions, specific for plotting the random Forest object. The function uses "Leave one out" type of cross validation error and it is combined with "Bagging" to improve the performance. The output is an object with that contains the model fit and it already calculates the confusion Matrix  and the "Out of bag" error. For this project I use the function "train" with "rf"  taught in the class, but add an example of randomForest as a reference.
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 #modelRf2 <- randomForest(f, data=pml.training, importance = FALSE,ntree = 50,mtry=length(subset))
 ```
 
@@ -78,7 +78,7 @@ predictRf <- predict(modelRf, testData)
 We new that the random Forest model is quite accurate in this case , the accuracy is   98.23% and the stimated out-of-sample error 1.77%. Increasing the number of trees would improve the accuracy at a cost of a big downgrade of the performance. Therefore tuning the number of trees it would not bring any benefit.
 
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 cm<-confusionMatrix(testData$classe, predictRf)
 accuracy <- as.numeric(cm$overall[1])
 oose <- 1 - accuracy
@@ -90,7 +90,7 @@ oose
 
 ##Results
 Applying the model to the testing data of this project's problem.
-```{r}
+```{r,message=FALSE,warning=FALSE}
 result <- predict(modelRf, pml.testing)
 result
 ```

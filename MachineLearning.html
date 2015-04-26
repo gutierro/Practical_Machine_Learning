@@ -71,21 +71,12 @@ img {
 <div id="exploratory-data-analyses" class="section level3">
 <h3>Exploratory data analyses</h3>
 <p>To improve the performance I have reduced the dimension of the data sets, removing the irrelevant features. Exploring the testing data set, it can be observed several features that don’t have a value (NA) and therefor they won’t be relevant for the prediction. I reduce the original data sets to new ones with only the features with the sensors data and excluding the others, but including the class.</p>
-<pre class="r"><code>library(caret)</code></pre>
-<pre><code>## Warning: package 'caret' was built under R version 3.1.2</code></pre>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## Warning: package 'lattice' was built under R version 3.1.3</code></pre>
-<pre><code>## Loading required package: ggplot2</code></pre>
-<pre><code>## Warning: package 'ggplot2' was built under R version 3.1.3</code></pre>
-<pre class="r"><code>library(rpart)</code></pre>
-<pre><code>## Warning: package 'rpart' was built under R version 3.1.2</code></pre>
-<pre class="r"><code>library(randomForest)</code></pre>
-<pre><code>## Warning: package 'randomForest' was built under R version 3.1.2</code></pre>
-<pre><code>## randomForest 4.6-10
-## Type rfNews() to see new features/changes/bug fixes.</code></pre>
-<pre class="r"><code>library(FSelector)</code></pre>
-<pre><code>## Warning: package 'FSelector' was built under R version 3.1.2</code></pre>
-<pre class="r"><code>pml.training&lt;-read.csv(&quot;pml-training.csv&quot;)
+<pre class="r"><code>library(caret)
+library(rpart)
+library(randomForest)
+library(FSelector)
+
+pml.training&lt;-read.csv(&quot;pml-training.csv&quot;)
 pml.testing&lt;-read.csv(&quot;pml-testing.csv&quot;)
 
 colNames&lt;-names(pml.testing[,colSums(is.na(pml.testing)) != nrow(pml.testing)])

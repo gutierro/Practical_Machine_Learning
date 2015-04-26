@@ -104,7 +104,7 @@ testData &lt;- pml.training[-inTrain, ]</code></pre>
 </div>
 <div id="predictive-model-fitting" class="section level3">
 <h3>Predictive Model fitting</h3>
-<p>I use the Random Forest algorithm for because is quiet accurate and it works very well with the noise.[1]<br />For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated.</p>
+<p>I use the Random Forest algorithm for because is quiet accurate and it works very well with the noise.[1]<br />For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated. The classifier was tested with 10-fold cross-validation.</p>
 <pre class="r"><code>controlRf &lt;- trainControl(method=&quot;cv&quot;, 10)
 modelRf &lt;- train(f, data=trainData, method=&quot;rf&quot;, trControl=controlRf, ntree=50)
 predictRf &lt;- predict(modelRf, testData)</code></pre>

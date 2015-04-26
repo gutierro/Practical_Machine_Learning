@@ -58,7 +58,7 @@ testData <- pml.training[-inTrain, ]
 
 ###Predictive Model fitting
 I use the Random Forest algorithm for because is quiet accurate and it works very well with the noise.[1]  
-For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated.
+For performance reasons I select the number of trees to 50. Increasing the number only improves slightly the accuracy but in contrast the performance gets highly deteriorated. The classifier was tested with 10-fold  cross-validation.
 
 ```{r,message=FALSE,warning=FALSE}
 controlRf <- trainControl(method="cv", 10)
